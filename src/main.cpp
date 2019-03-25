@@ -1,5 +1,7 @@
 #include <afo.h>
-#include <kalman_filter.h>
+#include <kalman_imu.h>
+#include <kalman_ptm.h>
+#include <kalman_encoder.h>
 #include <math.h>
 #include <fstream>
 #include <random>
@@ -26,26 +28,25 @@ int main( int argc , char **argv )
     std::ofstream myfile;
     myfile.open("data.dat");
 
-    double dt = 0.01;
     // Define random generator with Gaussian distribution
     const double mean = 0.0;
     const double stddev = 0.1;
     std::default_random_engine generator;
     std::normal_distribution<double> dist(mean, stddev);
 
-    KalmanFilter kalmanImu;
-    kalmanImu.InitImuFilter();
-    std::cout  << kalmanImu.imu_f_.x.transpose() << std::endl;
+    KalmanImu kalmanImu;
+    kalmanImu.InitFilter();
+    std::cout  << kalmanImu.ft.x.transpose() << std::endl;
     for( size_t n=0 ; n < 2000 ; ++n )//40s offline simulation
     {
-      double input[3] = {sin(2*M_PI*dt*n), 0, 0};//+ dist(generator);
+      double input[3] = {sin(2*M_PI*kalmanImu.ft.dt*n), 0, 0};//+ dist(generator);
       std::cout << "input: " << input[0] << std::endl;
-      kalmanImu.UpdateImu(input);
+      kalmanImu.UpdateFilter(input);
 
-      std::cout << " output: " << kalmanImu.imu_f_.x.transpose() << std::endl;
+      std::cout << " output: " << kalmanImu.ft.x.transpose() << std::endl;
       std::cout << std::endl;
-      myfile << n*0.01 << "   " << input[0] << "   " << kalmanImu.imu_f_.x[0] << " " << kalmanImu.imu_f_.x[1]
-             << " " << kalmanImu.imu_f_.x[2] << std::endl;
+      myfile << n*kalmanImu.ft.dt << "   " << input[0] << "   " << kalmanImu.ft.x[0] << " " << kalmanImu.ft.x[1]
+             << " " << kalmanImu.ft.x[2] << std::endl;
     }
     myfile.close();
     return 0;

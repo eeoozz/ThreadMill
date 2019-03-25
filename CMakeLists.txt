@@ -15,7 +15,7 @@ file(GLOB SOURCES "src/*.cpp")
 #link_directories(${PCL_LIBRARY_DIRS})
 #add_definitions(${PCL_DEFINITIONS})
 
-set (SRC_CPP src/kalman_filter.cpp src/afo.cpp)
+set (SRC_CPP ${SOURCES})
 add_library(funccpp_lib STATIC ${SRC_CPP})
 
 add_executable(test_cpp src/main.cpp)
