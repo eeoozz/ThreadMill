@@ -38,13 +38,13 @@ int main( int argc , char **argv )
     std::cout  << kalmanImu.imu_f_.x.transpose() << std::endl;
     for( size_t n=0 ; n < 2000 ; ++n )//40s offline simulation
     {
-      double input = sin(2*M_PI*dt*n);//+ dist(generator);
-      std::cout << "input: " << input << std::endl;
+      double input[3] = {sin(2*M_PI*dt*n), 0, 0};//+ dist(generator);
+      std::cout << "input: " << input[0] << std::endl;
       kalmanImu.UpdateImu(input);
 
       std::cout << " output: " << kalmanImu.imu_f_.x.transpose() << std::endl;
       std::cout << std::endl;
-      myfile << n*0.01 << "   " << input << "   " << kalmanImu.imu_f_.x[0] << " " << kalmanImu.imu_f_.x[1]
+      myfile << n*0.01 << "   " << input[0] << "   " << kalmanImu.imu_f_.x[0] << " " << kalmanImu.imu_f_.x[1]
              << " " << kalmanImu.imu_f_.x[2] << std::endl;
     }
     myfile.close();

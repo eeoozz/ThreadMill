@@ -13,7 +13,8 @@ int main(){
     initKalmanImu(temp_kalmanImu);
     for( size_t n=0 ; n < 2000 ; ++n )//40s offline simulation
     {
-      updateKalmanImu(temp_kalmanImu, sin(2*M_PI*dt*n));
+      double input[3] = {sin(2*M_PI*dt*n), 0, 0};
+      updateKalmanImu(temp_kalmanImu, input);
     }
     return 0;
 }

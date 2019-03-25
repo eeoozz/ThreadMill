@@ -21,10 +21,10 @@ public:
 
   void InitImuFilter();
   Kalman imu_f_;
-  void UpdateImu(double y_in);
+  void UpdateImu(double y_in[3]);
 private:
   void Predict();
-  void Correct(double y_in);
+  void Correct(double y_in[3]);
 };
 #endif
 
@@ -35,7 +35,7 @@ extern "C" {
 
   void* createKalmanImu();
   void initKalmanImu( void *kalman_imu);
-  void updateKalmanImu(void *kalman_imu, double y_in);
+  void updateKalmanImu(void *kalman_imu, double y_in[3]);
 
 
 #ifdef __cplusplus

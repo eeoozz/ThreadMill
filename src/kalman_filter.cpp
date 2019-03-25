@@ -24,9 +24,9 @@ void KalmanFilter::InitImuFilter() {
   imu_f_.x = {0, 0, 0};
 }
 
-void KalmanFilter::UpdateImu(double y_in) {
-  Predict();
-  Correct(y_in);
+void KalmanFilter::UpdateImu(double y_in[3]) {
+  KalmanFilter::Predict();
+  KalmanFilter::Correct(y_in);
 }
 
 void KalmanFilter::Predict() {
@@ -35,14 +35,11 @@ void KalmanFilter::Predict() {
   std::cout << "x predicted:" << imu_f_.x_pred.transpose() << std::endl;
 }
 
-void KalmanFilter::Correct(double y_in) {
-  //L_k - the gain
-  Eigen::Vector3d L_k, input{y_in, 0, 0};
-  //Eigen::Matrix<double, 1, 3> input;
-  //input << y_in, 0, 0;
+void KalmanFilter::Correct(double y_in[3]) {
+  Eigen::Vector3d L_k, input{y_in[0], y_in[1], y_in[2]};
   L_k = imu_f_.P_pred * imu_f_.C /(imu_f_.C.transpose() * imu_f_.P_pred * imu_f_.C + imu_f_.R_d);
   //correct and update
-  imu_f_.x = imu_f_.x_pred + L_k*(y_in - imu_f_.C.transpose()*imu_f_.x_pred);
+  imu_f_.x = imu_f_.x_pred + L_k*(input.transpose()*imu_f_.C - imu_f_.C.transpose()*imu_f_.x_pred);
   imu_f_.P = (imu_f_.I - L_k * imu_f_.C.transpose()) * imu_f_.P_pred;
   std::cout << "L_k:" << L_k.transpose() << std::endl;
   std::cout << "P matrix: " << imu_f_.P << std::endl;
@@ -58,6 +55,6 @@ void initKalmanImu( void *kalman_imu) {
   reinterpret_cast< KalmanFilter* >( kalman_imu )->InitImuFilter();
 }
 
-void updateKalmanImu(void *kalman_imu, double y_in) {
+void updateKalmanImu(void *kalman_imu, double y_in[]) {
   reinterpret_cast< KalmanFilter* >( kalman_imu )->UpdateImu(y_in);
 }
