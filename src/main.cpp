@@ -5,6 +5,8 @@
 #include <math.h>
 #include <fstream>
 #include <random>
+#include <sys_param.h>
+#include <model_param.h>
 
 int main( int argc , char **argv )
 {
@@ -48,6 +50,8 @@ int main( int argc , char **argv )
       myfile << n*kalmanImu.ft.dt << "   " << input[0] << "   " << kalmanImu.ft.x[0] << " " << kalmanImu.ft.x[1]
              << " " << kalmanImu.ft.x[2] << std::endl;
     }
+
+    ModelParam hk(true);
     myfile.close();
     return 0;
 }

@@ -1,4 +1,4 @@
-#include <kalman_ecd.h>
+#include <kalman_encoder.h>
 
 void KalmanEcd::InitFilter() {
   ft.dt = 0.005;
@@ -8,7 +8,7 @@ void KalmanEcd::InitFilter() {
   ft.Q_d << 4.70683e-13,  2.35342e-10,   6.27578e-8,
             2.35342e-10,   1.25516e-7, 0.0000376547,
             6.27578e-8, 0.0000376547,    0.0150619;
-  ft.R_d = 4.851e-8; 
+  ft.R_d = 4.851e-8;
   ft.A_d << 1.0000, 0.0050, 0.0000,
             0, 1.0000, 0.0050,
             0, 0, 1.0000;
