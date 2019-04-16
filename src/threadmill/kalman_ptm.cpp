@@ -24,7 +24,7 @@ void KalmanPtm::InitFilter() {
 
 
 //wrapper functions for c implementation
-void* createKalmanPtm() {
+void* KalmanPtm_c() {
   KalmanPtm *out(new KalmanPtm);
   return( reinterpret_cast< void* >( out ) );
 }

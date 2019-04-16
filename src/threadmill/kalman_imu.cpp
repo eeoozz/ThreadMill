@@ -24,7 +24,7 @@ void KalmanImu::InitFilter() {
 
 
 //wrapper functions for c implementation
-void* createKalmanImu() {
+void* KalmanImu_c() {
   KalmanImu *out(new KalmanImu);
   return( reinterpret_cast< void* >( out ) );
 }

@@ -16,7 +16,7 @@ public:
 extern "C" {
 #endif
 
-  void* createKalmanEcd();
+  void* KalmanEcd_c();
   void initKalmanEcd( void *kalman_ecd);
   void updateKalmanEcd(void *kalman_ecd, double y_in[3]);
 

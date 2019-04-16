@@ -5,7 +5,7 @@
 
 class DigitalFilt{
 public:
-  DigitalFilt() {};
+  DigitalFilt(int size);
   DigitalFilt(double * A, double * B, int size);
   double Filt(double in);
   double * A;

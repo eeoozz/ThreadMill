@@ -38,8 +38,8 @@ class AFO {
          }
        }
    };
-   int Init(double dt);
-   double DoStep(double input);
+   int AfoInit(double dt);
+   double AfoStep(double input);
 
    AfoSys afo_sys;
    state_type x; //phi, omega, k_alpha(12), k_beta(12)
@@ -54,9 +54,9 @@ class AFO {
 extern "C" {
 #endif
 
-  void* createAfo();
-  void initAfo( void *afo, double dt );
-  double stepAfo(void *afo, double input);
+  void* AFO_c();
+  void AfoInit_c( void *afo, double dt );
+  double AfoStep_c(void *afo, double input);
 
 
 #ifdef __cplusplus

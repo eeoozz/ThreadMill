@@ -17,7 +17,7 @@ public:
 extern "C" {
 #endif
 
-  void* createKalmanPtm();
+  void* KalmanPtm_c();
   void initKalmanPtm( void *kalman_ptm);
   void updateKalmanPtm(void *kalman_ptm, double y_in[3]);
 

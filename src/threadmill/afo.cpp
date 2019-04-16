@@ -1,6 +1,6 @@
 #include <afo.h>
 
-int AFO::Init(double dt) {
+int AFO::AfoInit(double dt) {
   x[0] = 0;  //phi
   x[1] = 0.4 * 2 * M_PI;  //omega, initial guessing value: 0.4Hz or 0.8pi/s
   x[2] = 1;  //k_alpha[0]
@@ -13,7 +13,7 @@ int AFO::Init(double dt) {
 }
 
 
-double AFO::DoStep(double input) {
+double AFO::AfoStep(double input) {
   phi_input = input;
   phi_reconstruct = 0.0;
   stepper.do_step( afo_sys , x , t , dt );
@@ -31,16 +31,16 @@ double AFO::DoStep(double input) {
 }
 
 //wrapper functions for c implementation
-void* createAfo() {
+void* AFO_c() {
    AFO *out( new AFO);
    return( reinterpret_cast< void* >( out ) );
 }
 
-void initAfo( void *afo, double dt) {
-   int k = reinterpret_cast< AFO* >( afo )->Init(dt);
+void AfoInit_c( void *afo, double dt) {
+   int k = reinterpret_cast< AFO* >( afo )->AfoInit(dt);
 }
 
-double stepAfo(void *afo, double input) {
-  double phi = reinterpret_cast< AFO* >( afo )->DoStep(input);
+double AfoStep_c(void *afo, double input) {
+  double phi = reinterpret_cast< AFO* >( afo )->AfoStep(input);
   return phi;
 }

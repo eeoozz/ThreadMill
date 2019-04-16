@@ -69,10 +69,6 @@ private:
 
     bool resetStateOnGainChange;
 
-    /**
-     * Sets the gain parameters
-     */
-    void set( double b0, double b1, double b2, double a1, double a2 );
 
 public:
 
@@ -104,6 +100,11 @@ public:
      * @return BiQuad instance
      */
     BiQuad( double b0, double b1, double b2, double a0, double a1, double a2 );
+
+    /**
+     * Sets the gain parameters
+     */
+    void set( double b0, double b1, double b2, double a1, double a2 );
 
     /**
      * Initialize a PIDF biquad.

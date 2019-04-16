@@ -1,6 +1,17 @@
 #include <digital_filter.h>
 #include <iostream>
 
+DigitalFilt::DigitalFilt(int size) {
+  this-> size = size;
+  input = new double[size];
+  output = new double[size];
+  //initialize input and output data series with all 0
+  for (int count = 0; count < size; count ++) {
+    input[count] = 0;
+    output[count] = 0;
+  }
+}
+
 DigitalFilt::DigitalFilt(double * A, double * B, int size) {
   this-> A = A;
   this-> B = B;
@@ -12,8 +23,6 @@ DigitalFilt::DigitalFilt(double * A, double * B, int size) {
     input[count] = 0;
     output[count] = 0;
   }
-  std::cout << "input " << input[0] << std::endl;
-  std::cout << "output " << output[0] << std::endl;
 }
 
 double DigitalFilt::Filt(double in) {

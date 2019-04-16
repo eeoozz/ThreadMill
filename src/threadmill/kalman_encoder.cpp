@@ -24,7 +24,7 @@ void KalmanEcd::InitFilter() {
 
 
 //wrapper functions for c implementation
-void* createKalmanEcd() {
+void* KalmanEcd_c() {
   KalmanEcd *out(new KalmanEcd);
   return( reinterpret_cast< void* >( out ) );
 }

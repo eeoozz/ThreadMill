@@ -8,7 +8,7 @@ project(threadmill)
 include_directories(include
                     /usr/include/eigen3)
 
-file(GLOB SOURCES "src/*.c*")
+file(GLOB SOURCES "src/threadmill/*.c*")
 
 #find_package(PCL 1.7 REQUIRED)
 #include_directories(${PCL_INCLUDE_DIRS})
@@ -29,3 +29,5 @@ target_link_libraries(control_test_cpp ${PROJECT_LINK_LIBS} funccpp_lib)
 
 add_executable(control_test_c src/control_test.c)
 target_link_libraries(control_test_c ${PROJECT_LINK_LIBS} funccpp_lib)
+
+add_executable(socket_test "src/socket_test.cpp")

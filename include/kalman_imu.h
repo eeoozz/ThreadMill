@@ -16,7 +16,7 @@ public:
 extern "C" {
 #endif
 
-  void* createKalmanImu();
+  void* KalmanImu_c();
   void initKalmanImu( void *kalman_imu);
   void updateKalmanImu(void *kalman_imu, double y_in[3]);
 
