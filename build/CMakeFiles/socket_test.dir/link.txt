@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/socket_test.dir/src/socket_test.cpp.o  -o socket_test -rdynamic 

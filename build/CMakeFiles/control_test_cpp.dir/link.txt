@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/control_test_cpp.dir/src/control_test.cpp.o  -o control_test_cpp -rdynamic libfunccpp_lib.a 

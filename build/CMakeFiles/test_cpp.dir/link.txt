@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/test_cpp.dir/src/main.cpp.o  -o test_cpp -rdynamic libfunccpp_lib.a 
