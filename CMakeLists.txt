@@ -30,4 +30,3 @@ target_link_libraries(control_test_cpp ${PROJECT_LINK_LIBS} funccpp_lib)
 add_executable(control_test_c src/control_test.c)
 target_link_libraries(control_test_c ${PROJECT_LINK_LIBS} funccpp_lib)
 
-add_executable(socket_test "src/socket_test.cpp")

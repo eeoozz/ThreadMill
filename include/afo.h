@@ -15,7 +15,6 @@
 
 typedef std::vector<double> state_type;
 
-
 class AFO {
  public:
    AFO():x(24, 0){};
@@ -39,13 +38,15 @@ class AFO {
        }
    };
    int AfoInit(double dt);
-   double AfoStep(double input);
+   double* AfoStep(double input);
 
    AfoSys afo_sys;
    state_type x; //phi, omega, k_alpha(12), k_beta(12)
    double phi_input, phi_reconstruct, t, dt;
  private:
+   double afoOutput[5] = {0, 0, 0, 0, 0}; //sig_afo, f_afo, y_fund, ampl_ang, y_rec
    boost::numeric::odeint::runge_kutta_dopri5<state_type> stepper;
+   float fact_afo = 4.0;
  };
  #endif
 
@@ -56,7 +57,7 @@ extern "C" {
 
   void* AFO_c();
   void AfoInit_c( void *afo, double dt );
-  double AfoStep_c(void *afo, double input);
+  double* AfoStep_c(void *afo, double input);
 
 
 #ifdef __cplusplus

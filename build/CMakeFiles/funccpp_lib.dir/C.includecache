@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/digital_filters.h
+
+/home/zoe/ode_afo/src/threadmill/src/threadmill/digital_filters.c
+digital_filters.h
+/home/zoe/ode_afo/src/threadmill/src/threadmill/digital_filters.h
+

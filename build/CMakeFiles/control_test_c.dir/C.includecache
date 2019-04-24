@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/afo.h
+math.h
+-
+vector
+-
+boost/numeric/odeint.hpp
+-
+boost/numeric/odeint/stepper/runge_kutta4.hpp
+-
+boost/numeric/odeint/stepper/runge_kutta_dopri5.hpp
+-
+boost/numeric/odeint/stepper/runge_kutta_cash_karp54.hpp
+-
+boost/numeric/odeint/stepper/generation.hpp
+-
+
+../include/digital_filters.h
+
+/home/zoe/ode_afo/src/threadmill/src/control_test.c
+afo.h
+/home/zoe/ode_afo/src/threadmill/src/afo.h
+digital_filters.h
+/home/zoe/ode_afo/src/threadmill/src/digital_filters.h
+stdio.h
+-
+

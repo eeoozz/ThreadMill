@@ -8,6 +8,8 @@
 #include <sys_param.h>
 #include <model_param.h>
 #include <imu_udp.h>
+#include <torque_amp.h>
+#include <ff_control.h>
 
 int main( int argc , char **argv )
 {
@@ -61,9 +63,51 @@ int main( int argc , char **argv )
     return 0;
     */
 
+
+    std::ofstream myfile;
+    myfile.open("test.dat");
+
+    //int count = 0;
+    double freq_imu = 0.005;
+
     //imu communication*************************************************************************
     ImuUdp imuComm;
     imuComm.imuSend("Q");
-    imuComm.imuListen();
+    float outImu = 0;
+    //afo
+    AFO afoOb;
+    afoOb.AfoInit(freq_imu);
+    double * outAfo;
+    //torque amplitude
+    TorqueAmp tqamp;
+    double * outTq;
+    //feedforward control
+
+    FFControl ffcontrol;
+    double u_ff;
+    double F_ref_d;
+
+    for (int count = 0; count < 2000; count ++) {
+    //while (outImu > -9) {
+      std::cout << "*************************" << std::endl;
+      //outImu = imuComm.imuListen();
+      //simulate imu now
+      outImu = (sin(2 *M_PI * count * freq_imu)+1)*0.5;
+
+      outAfo = afoOb.AfoStep(outImu);  //output: sig_afo, f_afo, y_fund, ampl_ang, y_rec
+      
+      outTq = tqamp.velFactor(outAfo[1], outAfo[3]); //input: f_afo, ampl_ang    output: v_ref, ampl_fact
+
+      //F_ref_d = (sin(2 * M_PI * count * freq_imu) + 1) * 50;
+      F_ref_d = (sin(2 * M_PI * count * freq_imu)+1)*50 ;
+      u_ff = ffcontrol.dfFFControlOut(outTq[1], F_ref_d); //input: ampl_fact, F_ref_d
+
+      std::cout << (float)count * freq_imu << " " << outImu << " " << outAfo[1] << " " << outTq[1] << " " << u_ff << std::endl;
+      myfile << (float)count * freq_imu << " " << outImu << " " << outAfo[1] << " " << outTq[1] << " " << u_ff << std::endl;
+      //std::cout << (float)count * freq_imu << " " << F_ref_d << " " << ffcontrol.f_ref_filt << std::endl;
+      //myfile << (float)count * freq_imu << " " << F_ref_d << " " << ffcontrol.f_ref_filt << std::endl;
+    }
+
+    myfile.close();
     return 0;
 }

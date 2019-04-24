@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/digitest.dir/src/digitest.cpp.o  -o digitest -rdynamic libfunccpp_lib.a 
