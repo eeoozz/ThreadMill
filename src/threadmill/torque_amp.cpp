@@ -11,6 +11,7 @@ void* TorqueAmp_c() {
    return( reinterpret_cast< void* >( tqamp ) );
 }
 
+//currently just assume amplitude factor is 1, might change it in the future
 double* velFactor_c(void *tqamp, double f_afo, double ampl_ang) {
   double* out = reinterpret_cast< TorqueAmp* >( tqamp )-> velFactor(f_afo, ampl_ang);
   return out;

@@ -5,8 +5,6 @@
 #include <math.h>
 #include <fstream>
 #include <random>
-#include <sys_param.h>
-#include <model_param.h>
 #include <imu_udp.h>
 #include <torque_amp.h>
 #include <ff_control.h>
@@ -82,7 +80,6 @@ int main( int argc , char **argv )
     TorqueAmp tqamp;
     double * outTq;
     //feedforward control
-
     FFControl ffcontrol;
     double u_ff;
     double F_ref_d;
@@ -95,7 +92,7 @@ int main( int argc , char **argv )
       outImu = (sin(2 *M_PI * count * freq_imu)+1)*0.5;
 
       outAfo = afoOb.AfoStep(outImu);  //output: sig_afo, f_afo, y_fund, ampl_ang, y_rec
-      
+
       outTq = tqamp.velFactor(outAfo[1], outAfo[3]); //input: f_afo, ampl_ang    output: v_ref, ampl_fact
 
       //F_ref_d = (sin(2 * M_PI * count * freq_imu) + 1) * 50;

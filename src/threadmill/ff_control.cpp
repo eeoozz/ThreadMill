@@ -25,7 +25,7 @@ void* FFControl_c() {
   return( reinterpret_cast< void* >( out ) );
 }
 
-double  dfFFContrlOut_c(void* ffctrl, double ampl_fact, double f_ref_d) {
+double  dfFFControlOut_c(void* ffctrl, double ampl_fact, double f_ref_d) {
   double output = reinterpret_cast< FFControl* >( ffctrl )->dfFFControlOut(ampl_fact, f_ref_d);
   return output;
 }

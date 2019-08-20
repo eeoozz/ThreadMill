@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project(threadmill)
 
+find_package(Threads REQUIRED)
+
 include_directories(include
                     /usr/include/eigen3)
 
@@ -30,3 +32,5 @@ target_link_libraries(control_test_cpp ${PROJECT_LINK_LIBS} funccpp_lib)
 add_executable(control_test_c src/control_test.c)
 target_link_libraries(control_test_c ${PROJECT_LINK_LIBS} funccpp_lib)
 
+add_executable(cyclic_task src/cyclic_task.c)
+target_link_libraries(cyclic_task ${PROJECT_LINK_LIBS} funccpp_lib Threads::Threads)

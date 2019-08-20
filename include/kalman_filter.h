@@ -1,6 +1,7 @@
 #ifndef KALMAN_FILTER_H
 #define KALMAN_FILTER_H
 
+#ifdef __cplusplus
 #include <Eigen/Dense>
 
 class KalmanFilter {
@@ -25,7 +26,7 @@ private:
   void Predict();
   void Correct(double y_in[3]);
 };
-
+#endif
 
 
 #endif //end of KALMAN_FILTER_H

@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
   void*   FFControl_c();
-  double  dfFFContrlOut_c(void* ffctrl, double ampl_fact, double f_ref_d);
+  double  dfFFControlOut_c(void* ffctrl, double ampl_fact, double f_ref_d);
   double  bqFFControlOut_c(void* ffctrl, double ampl_fact, double f_ref_d);
 
 #ifdef __cplusplus
