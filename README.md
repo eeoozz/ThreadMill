@@ -1,6 +1,6 @@
 Threadmill
 ===
-This is the library for controlling the the threadmill. It is written according to Gabriel's Simulink model.
+This is the library for controlling the the threadmill.
 
 Source files:
 
